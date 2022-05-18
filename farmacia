@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.Random;
 import java.lang.*;
 
-public class farmacia {
+public class lojinha {
 
     public static void main (String args[]) {
 
@@ -736,8 +736,6 @@ public class farmacia {
                                             System.out.print("Digite O Valor Do Desconto: % ");
                                             desconto = descontos.nextFloat();
 
-                                            desconto = (desconto / 100);
-
                                             System.out.println("Desconto adicionado com sucesso");
 
                                             break;
@@ -1171,7 +1169,7 @@ public class farmacia {
 
                                                                     System.out.println("\nNossos cupons de desconto caem inteiramente no valor total do carrinho");
                                                                     System.out.println("\nValor do Carrinho sem desconto: R$ " + carrinho);
-                                                                    carrinho = carrinho - (carrinho * desconto);
+                                                                    carrinho = carrinho - (carrinho * (desconto / 100) );
 
                                                                     System.out.println("Valor do carrinho com desconto: R$ " + carrinho);
                                                                     vetor_carrinho[contador] = carrinho;

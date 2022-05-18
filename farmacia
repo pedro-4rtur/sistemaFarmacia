@@ -22,8 +22,8 @@ public class farmacia {
         Scanner nome_cupons = new Scanner(System.in);
         Scanner qtd = new Scanner(System.in);
 
-        String nome, produto, nome_cliente, nome_cupom, nome_cupom_cliente, sexo_resultado, name_cliente, senha_cliente, pessoa_resultado, logradouro, complemento, bairro, cidade, estado;
-        int verdadeiro, senha, quantidade_retirar, forma_de_pagamento, opcao_desconto, opcao_cupom,  cadastro_clientes, remover_desconto,  t, prox, codigo_produtos_clientes,  codigo_produtos, opcao_inicial, opcao_menu_fun, opcao_cliente, opcoes_produtos, sexo, idade, pessoa, dd, telefone, lista_cliente, c_cliente, editar_dados, escolha_editar, opcao_menu_cliente, quantidade, contador, contador_itens,  opcao_continuar_compras;
+        String nome, produto, nome_cliente, nome_cupom, nome_cupom_cliente, sexo_resultado, name_cliente, pessoa_resultado, logradouro, complemento, bairro, cidade, estado;
+        int verdadeiro, senha, quantidade_retirar, forma_de_pagamento, opcao_desconto, opcao_cupom, remover_desconto,  t, prox, codigo_produtos_clientes,  codigo_produtos, opcao_inicial, opcao_menu_fun, opcao_cliente, opcoes_produtos, sexo, idade, pessoa, dd, telefone, lista_cliente, c_cliente, editar_dados, escolha_editar, opcao_menu_cliente, quantidade, contador, contador_itens,  opcao_continuar_compras;
         float precos, desconto, carrinho, saldo;
 
 
@@ -39,6 +39,8 @@ public class farmacia {
         opcao_continuar_compras = 0;
         nome_cupom = null;
         saldo = 1000;
+
+        //VARIAVEL QUE CONTROLA QUAL CLIENTE ESTA COMPRANDO
         contador_itens = 0;
 
         //PARA O CAPTCHA
@@ -65,6 +67,7 @@ public class farmacia {
         String vetor_produtos_clientes[] = new String[t];
         int vetor_quantidades[] = new int[t];
 
+        //DEIXANDO PRODUTOS JA PRE-CADASTRADOS
         vetor_produtos[0] = "Dipirona";
         vetor_produtos[1] = "Dorflex";
         vetor_produtos[2] = "Amoxilina";
@@ -73,6 +76,7 @@ public class farmacia {
         vetor_valores[1] = (float) 22.5;
         vetor_valores[2] = 50;
 
+        //DEIXANDO UM CLIENTE JA PRE-CADASTRADO
         vetor_clientes[0] = "pedro";
         vetor_sexos[0] = "MASCULINO";
         vetor_idades[0] = 19;
@@ -85,6 +89,7 @@ public class farmacia {
         vetor_telefones[0] = 12345678;
         vetor_complementos[0] = "xxx";
 
+        //INICIALIZANDO OS VETORES DE CODIGOS
         for (int i = 0; i < vetor_codigos.length;i++) {
 
             vetor_codigos_produtos[i] = i;
@@ -888,9 +893,6 @@ public class farmacia {
 
                                     System.out.println("========== OLA, '" + name_cliente + "' SEJA BEM-VINDO ===========");
 
-                                    //LISTA PARA O CLIENTE
-
-
                                     carrinho = 0;
                                     contador = 0;
                                     vetor_codigos_produtos_clientes[contador] = 0;
@@ -900,6 +902,7 @@ public class farmacia {
 
                                     do {
 
+                                        //LISTA PARA O CLIENTE
 
                                         System.out.println("\nLISTA DE NOSSOS PRODUTOS \n");
                                         System.out.println("    CODIGO  |\tPRODUTO \t   |  VALOR UN.");
@@ -1146,7 +1149,7 @@ public class farmacia {
 
                                                 System.out.println("\nValor total do carrinho: R$ " + carrinho);
 
-                                                //SO VAI PERGUNTAR SOBRE O CUPOM SE JA HOUVER UM CUPOM CADASTRADO
+                                                //SO VAI PERGUNTAR SOBRE O CUPOM SE JA EXISTIR UM CUPOM CADASTRADO
                                                 if (nome_cupom != null) {
 
                                                     do {

@@ -645,6 +645,29 @@ public class farmacia {
 
                                         case 2:
 
+
+                                            System.out.println("\n    CODIGO  |\tPRODUTO \t   |  VALOR");
+                                            for (int i = 0; i < vetor_produtos.length; i++) {
+
+                                                if (vetor_produtos[i] != null) {
+
+                                                    System.out.print("\t   " + vetor_codigos_produtos[i]);
+                                                    System.out.print("    \t" + vetor_produtos[i]);
+
+                                                    if (vetor_produtos[i].length() <= 3) {
+
+                                                        System.out.print("\t");
+                                                    }
+                                                    if (vetor_produtos[i].length() <= 7) {
+
+                                                        System.out.print("\t");
+                                                    }
+                                                    System.out.print("\t      R$ " + vetor_valores[i] + "\n");
+
+                                                }
+
+                                            }
+
                                             System.out.print("\nDigite o Codigo Do Produto Que Quer Alterar o Valor: ");
                                             codigo_produtos = codigos_produtos.nextInt();
 
@@ -657,6 +680,28 @@ public class farmacia {
                                             break;
 
                                         case 3:
+
+                                            System.out.println("\n    CODIGO  |\tPRODUTO \t   |  VALOR");
+                                            for (int i = 0; i < vetor_produtos.length; i++) {
+
+                                                if (vetor_produtos[i] != null) {
+
+                                                    System.out.print("\t   " + vetor_codigos_produtos[i]);
+                                                    System.out.print("    \t" + vetor_produtos[i]);
+
+                                                    if (vetor_produtos[i].length() <= 3) {
+
+                                                        System.out.print("\t");
+                                                    }
+                                                    if (vetor_produtos[i].length() <= 7) {
+
+                                                        System.out.print("\t");
+                                                    }
+                                                    System.out.print("\t      R$ " + vetor_valores[i] + "\n");
+
+                                                }
+
+                                            }
 
                                             System.out.print("\nDigite o Codigo Do Produto Que Deseja Excluir: ");
                                             codigo_produtos = codigos_produtos.nextInt();
@@ -672,6 +717,7 @@ public class farmacia {
                                                     if (vetor_produtos[i+prox] == null) {
 
                                                         vetor_produtos[i] = null;
+                                                        vetor_valores[i] = 0;
                                                         break;
 
                                                     }
@@ -684,6 +730,7 @@ public class farmacia {
                                                         if (vetor_produtos[i+prox] == null) {
 
                                                             vetor_produtos[i] = null;
+                                                            vetor_valores[i] = 0;
                                                             break;
 
                                                         }
@@ -1228,9 +1275,13 @@ public class farmacia {
                                                                 forma_de_pagamento = 4;
                                                                 escolha_cliente = 4;
 
+                                                                vetor_carrinho[contador_itens] += carrinho;
+                                                                contador_itens++;
+
                                                             } else {
 
                                                                 System.out.println("\nSaldo insuficiente \n");
+                                                                System.out.println("Por favor consulte a Operadora do cartao.");
                                                             }
 
                                                             //BREAK CARTAO CREDITO
@@ -1238,10 +1289,10 @@ public class farmacia {
 
                                                         case 4:
 
-                                                            System.out.println("COMPRA CANCELADA ");
-                                                            System.out.println("Obrigado pela preferencia ");
+                                                            System.out.println("\nCOMPRA CANCELADA ");
+                                                            System.out.println("\nObrigado pela preferencia ");
 
-                                                            System.out.println("Voltando ao ESPACO CLIENTE... \n");
+                                                            System.out.println("\nVoltando ao ESPACO CLIENTE... \n");
                                                             escolha_cliente = 4;
 
                                                             break;
@@ -1254,9 +1305,6 @@ public class farmacia {
                                                     }
 
                                                 } while (forma_de_pagamento != 4);
-
-                                                vetor_carrinho[contador_itens] += carrinho;
-                                                contador_itens++;
 
 
                                                 //BREAK FECHAR COMPRA

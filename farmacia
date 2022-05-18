@@ -1,0 +1,1313 @@
+import java.util.Scanner;
+import java.util.Random;
+import java.lang.*;
+
+public class farmacia {
+
+    public static void main (String args[]) {
+
+
+        Scanner opcoes = new Scanner(System.in);
+        Scanner nome_fun = new Scanner(System.in);
+        Scanner senha_fun = new Scanner(System.in);
+        Scanner menu_fun = new Scanner(System.in);
+        Scanner captcha = new Scanner(System.in);
+        Scanner menu_cliente = new Scanner(System.in);
+        Scanner dados_cliente_s = new Scanner(System.in);
+        Scanner dados_cliente = new Scanner(System.in);
+        Scanner nome_produtos = new Scanner(System.in);
+        Scanner codigos_produtos = new Scanner(System.in);
+        Scanner novos_valores = new Scanner(System.in);
+        Scanner descontos = new Scanner(System.in);
+        Scanner nome_cupons = new Scanner(System.in);
+        Scanner qtd = new Scanner(System.in);
+
+        String nome, produto, nome_cliente, nome_cupom, nome_cupom_cliente, sexo_resultado, name_cliente, senha_cliente, pessoa_resultado, logradouro, complemento, bairro, cidade, estado;
+        int verdadeiro, senha, quantidade_retirar, forma_de_pagamento, opcao_desconto, opcao_cupom,  cadastro_clientes, remover_desconto,  t, prox, codigo_produtos_clientes,  codigo_produtos, opcao_inicial, opcao_menu_fun, opcao_cliente, opcoes_produtos, sexo, idade, pessoa, dd, telefone, lista_cliente, c_cliente, editar_dados, escolha_editar, opcao_menu_cliente, quantidade, contador, contador_itens,  opcao_continuar_compras;
+        float precos, desconto, carrinho, saldo;
+
+
+        int escolha_cliente;
+
+        t = 99;
+        int p = 1;
+        prox = 1;
+        desconto = 0;
+        verdadeiro = 0;
+        contador = 0;
+        carrinho = 0;
+        opcao_continuar_compras = 0;
+        nome_cupom = null;
+        saldo = 1000;
+        contador_itens = 0;
+
+        //PARA O CAPTCHA
+        int num1 = 0, num2 = 0,resultado_captcha, resposta_cliente;
+
+        String vetor_clientes[] = new String[t];
+        String vetor_produtos[] = new String[t];
+        float vetor_valores[] = new float[t];
+        float vetor_valores_cliente[] = new float[t];
+        int vetor_codigos[] = new int[t];
+        int vetor_codigos_produtos[] = new int[t];
+        int vetor_codigos_produtos_clientes[] = new int[t];
+        String vetor_logradouros[] = new String[t];
+        String vetor_complementos[] = new String[t];
+        String vetor_bairros[] = new String[t];
+        String vetor_estados[] = new String[t];
+        String vetor_cidades[] = new String[t];
+        String vetor_sexos[] = new String[t];
+        int vetor_idades[] = new int[t];
+        int vetor_dds[] = new int[t];
+        int vetor_telefones[] = new int[t];
+        String vetor_pessoas[] = new String[t];
+        float vetor_carrinho[] = new float[t];
+        String vetor_produtos_clientes[] = new String[t];
+        int vetor_quantidades[] = new int[t];
+
+        vetor_produtos[0] = "Dipirona";
+        vetor_produtos[1] = "Dorflex";
+        vetor_produtos[2] = "Amoxilina";
+
+        vetor_valores[0] = (float) 23.7;
+        vetor_valores[1] = (float) 22.5;
+        vetor_valores[2] = 50;
+
+        vetor_clientes[0] = "pedro";
+        vetor_sexos[0] = "MASCULINO";
+        vetor_idades[0] = 19;
+        vetor_pessoas[0] = "FISICA";
+        vetor_logradouros[0] = "xxx";
+        vetor_bairros[0] = "xxx";
+        vetor_cidades[0] = "xxx";
+        vetor_estados[0] = "xxx";
+        vetor_dds[0] = 87;
+        vetor_telefones[0] = 12345678;
+        vetor_complementos[0] = "xxx";
+
+        for (int i = 0; i < vetor_codigos.length;i++) {
+
+            vetor_codigos_produtos[i] = i;
+            vetor_codigos[i] = i;
+        }
+
+
+
+
+        System.out.println("====== BEM-VINDO A DROGARIA BRASIL ======");
+
+        do {
+
+            //TELA INICIAL DO SISTEMA
+            System.out.println(" 1  |  Sou 'Funcionario'");
+            System.out.println(" 2  |  Sou 'Cliente'");
+            System.out.println(" 3  |  Sair\n");
+            System.out.print("Digite Um Numero Para PROSSEGUIR: ");
+            opcao_inicial = opcoes.nextInt();
+
+            //SWITCH PARA TELA INICAL DO SISTEMA
+            switch (opcao_inicial) {
+
+                //CASE FUNCIONARIO
+                case 1:
+
+                    //SENHA DO FUNCIONARIO
+                    System.out.println("\n======= LOGIN FUNCIONARIO =======\n");
+                    System.out.print("Digite Seu nome: ");
+                    nome = nome_fun.nextLine();
+
+                    //SE A SENHA ESTIVER CERTA/ERRADA
+                    do {
+
+
+                        System.out.print("Digite A Senha: ");
+                        senha = senha_fun.nextInt();
+
+                        if (senha == 166){
+
+                            System.out.println("\n=X=X=X= LOGIN APROVADO =X=X=X=\n");
+
+                        }
+
+                        else{
+
+                            System.out.println("\n=X=X=X= SENHA INCORRETA =X=X=X=\n=X=X=X= TENTE NOVAMENTE =X=X=X=\n");
+                        }
+
+                    } while (senha != 166);
+
+                    //APOS A SENHA SER APROVADA
+                    System.out.println("=== OLA, *" + nome +"* SEJA BEM-VINDO ===");
+
+
+                    //DO PARA FUNÇÕES DO FUNCIONARIO
+                    do {
+
+                        //FUNÇOES QUE O FUNCIONARIO PODE USAR
+                        System.out.println("\n======MENU DE GERENCIAMENTO======");
+                        System.out.println(" 1  |  Gerenciar Clientes");
+                        System.out.println(" 2  |  Gerenciar Produtos");
+                        System.out.println(" 3  |  Gerenciar Desconto");
+                        System.out.println(" 4  |  Sair\n");
+                        System.out.print("Digite Um Numero Para PROSSEGUIR: ");
+                        opcao_menu_fun = menu_fun.nextInt();
+
+                        //FUNÇOES QUE O FUNCIONARIO PODE USAR
+                        switch (opcao_menu_fun){
+
+                            //GERENCIAR CLIENTES
+                            case 1:
+
+                                //TUDO SOBRE CLIENTE
+                                System.out.println("\n======GERENCIAR CLIENTES======");
+                                System.out.println(" 1  |  Cadastrar Cliente");
+                                System.out.println(" 2  |  Listar Clientes Cadastrados");
+                                System.out.println(" 3  |  Sair \n");
+                                System.out.print("Digite Um Numero Para PROSSEGUIR: ");
+                                opcao_cliente = menu_cliente.nextInt();
+
+                                switch (opcao_cliente){
+
+                                    //CADASTRAR CLIENTE
+                                    case 1:
+
+                                        System.out.println("\n======CADASTRO DE CLIENTE======");
+
+                                        System.out.print("Nome: ");
+                                        nome_cliente = dados_cliente_s.nextLine();
+                                        vetor_clientes[p] = nome_cliente;
+
+                                        System.out.print("Sexo: MASCULINO (1) OU FEMININO (2): ");
+                                        sexo = dados_cliente.nextInt();
+
+                                        switch (sexo) {
+
+                                            case 1:
+
+                                                sexo_resultado = "MASCULINO";
+                                                vetor_sexos[p] = sexo_resultado;
+
+                                                break;
+
+                                            case 2:
+
+                                                sexo_resultado = "FEMININO";
+                                                vetor_sexos[p] = sexo_resultado;
+
+                                                break;
+
+                                            default:
+
+                                                System.out.print("\n*CODIGO INVALIDO*\n");
+
+                                                break;
+                                        }
+
+                                        System.out.print("Idade: ");
+                                        idade = dados_cliente.nextInt();
+                                        vetor_idades[p] = idade;
+
+                                        System.out.print("Pessoa: Fisica (1) ou Juridica(2): ");
+                                        pessoa = dados_cliente.nextInt();
+
+                                        switch (pessoa){
+
+                                            case 1:
+
+                                                pessoa_resultado = "Fisica";
+                                                vetor_pessoas[p] = pessoa_resultado;
+
+                                                break;
+
+                                            case 2:
+
+                                                pessoa_resultado = "Juridica";
+                                                vetor_pessoas[p] = pessoa_resultado;
+
+                                                break;
+
+                                            default:
+
+                                                System.out.print("\n=X=X=X= COMANDO INVALIDO =X=X=X=\n");
+                                                break;
+                                        }
+
+                                        System.out.print("DD: ");
+                                        dd = dados_cliente.nextInt();
+                                        vetor_dds[p] = dd;
+
+                                        System.out.print("Telefone: ");
+                                        telefone = dados_cliente.nextInt();
+                                        vetor_telefones[p] = telefone;
+
+                                        System.out.println("\n======ENDERECO CLIENTE======");
+                                        System.out.print("Logradouro: ");
+                                        logradouro = dados_cliente_s.nextLine();
+                                        vetor_logradouros[p] = logradouro;
+
+                                        System.out.print("Complemento: ");
+                                        complemento = dados_cliente_s.nextLine();
+                                        vetor_complementos[p] = complemento;
+
+                                        System.out.print("Bairro: ");
+                                        bairro = dados_cliente_s.nextLine();
+                                        vetor_bairros[p] = bairro;
+
+                                        System.out.print("Cidade: ");
+                                        cidade = dados_cliente_s.nextLine();
+                                        vetor_cidades[p] = cidade;
+
+                                        System.out.print("Estado: ");
+                                        estado = dados_cliente_s.nextLine();
+                                        vetor_estados[p] = estado;
+
+                                        System.out.println("\n=X=X=X= CADASTRO REALIZADO =X=X=X=");
+
+                                        p++;
+
+
+                                        break;
+
+                                    //LISTA DE TODOS CLIENTES CADASTRADOS
+                                    case 2:
+
+
+                                        do {
+
+                                            System.out.println("\n===CLIENTES CADASTRADOS===");
+                                            System.out.println("==========================");
+                                            System.out.println("  Codigo  |   Nome");
+
+                                            for (int i = 0; i < t; i++) {
+
+                                                if (vetor_clientes[i] == null) {
+
+                                                    break;
+                                                }
+                                                else {
+
+                                                    System.out.println("    " + vetor_codigos[i] + "     |   " + vetor_clientes[i]);
+
+                                                }
+
+                                            }
+                                            System.out.println("==========================");
+                                            System.out.println("\n 1  |  Ver Informacoes Do Cliente");
+                                            System.out.println(" 2  |  Sair");
+                                            System.out.print("\nDigite Um Numero Para PROSSEGUIR: ");
+                                            lista_cliente = opcoes.nextInt();
+
+                                            switch (lista_cliente) {
+
+                                                //PARA VER INFORMÇÕES DO CLIENTE
+                                                case 1:
+
+                                                    System.out.print("\nDigite O Codigo Do *CLIENTE*: ");
+                                                    c_cliente =  dados_cliente.nextInt();
+
+                                                    do {
+
+
+
+
+                                                        System.out.println("====== CLIENTE "+ vetor_codigos[c_cliente] +" ======");
+                                                        System.out.println("Nome: " + vetor_clientes[c_cliente]);
+                                                        System.out.println("Idade: " + vetor_idades[c_cliente]);
+                                                        System.out.println("Sexo: " + vetor_sexos[c_cliente]);
+                                                        System.out.println("Pessoa: " + vetor_pessoas[c_cliente]);
+                                                        System.out.println("Telefone: (" + vetor_dds[c_cliente] + ") " + vetor_telefones[c_cliente]);
+                                                        System.out.println("====== ENDERECO ======");
+                                                        System.out.println("Logradouro: " + vetor_logradouros[c_cliente]);
+                                                        System.out.println("Complemento: " + vetor_complementos[c_cliente]);
+                                                        System.out.println("Cidade: " + vetor_cidades[c_cliente]);
+                                                        System.out.println("Estado: " + vetor_estados[c_cliente]);
+                                                        System.out.println("Bairro: " + vetor_bairros[c_cliente]);
+
+                                                        if (vetor_carrinho[c_cliente] == 0) {
+
+                                                            System.out.println("\nCarrinho: Vazio");
+                                                        }
+                                                        else {
+
+                                                            System.out.println("\nCarrinho: R$ " + vetor_carrinho[c_cliente]);
+                                                        }
+
+                                                        System.out.println("\n1  |  Editar Dados");
+                                                        System.out.println("2  |  Sair");
+                                                        System.out.print("\nDigite Um Numero Para PROSSEGUIR: ");
+                                                        editar_dados = opcoes.nextInt();
+
+                                                        switch (editar_dados) {
+
+                                                            //PARA MUDAR INFOMAÇÕES DO CLIENTE
+                                                            case 1:
+
+                                                                //EDITAR DADOS
+                                                                do{
+
+                                                                    System.out.println("\nCodigo |\tOpcoes\t\t|");
+                                                                    System.out.println("  1    |\tNome\t\t|");
+                                                                    System.out.println("  2    |\tIdade\t\t|");
+                                                                    System.out.println("  3    |\tSexo\t\t|");
+                                                                    System.out.println("  4    |\tPessoa\t\t|");
+                                                                    System.out.println("  5    |\tDDD\t\t\t|");
+                                                                    System.out.println("  6    |\tTelefone\t|");
+                                                                    System.out.println("  7    |\tLogradouro\t|");
+                                                                    System.out.println("  8    |\tComplemento\t|");
+                                                                    System.out.println("  9    |\tCidade\t\t|");
+                                                                    System.out.println(" 10    |\tEstado\t\t| ");
+                                                                    System.out.println(" 11    |\tBairro\t\t| ");
+                                                                    System.out.println(" 12    |\tSair\t\t|");
+                                                                    System.out.print("\nEscolha a opcao: ");
+                                                                    escolha_editar = opcoes.nextInt();
+
+                                                                    switch (escolha_editar){
+
+                                                                        case 1:
+
+                                                                            System.out.print("Digite o Novo Nome: ");
+                                                                            nome_cliente = dados_cliente_s.nextLine();
+                                                                            vetor_clientes[c_cliente] = nome_cliente;
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 2:
+
+                                                                            System.out.print("Digite a Nova Idade: ");
+                                                                            idade = dados_cliente.nextInt();
+                                                                            vetor_idades[c_cliente] = idade;
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 3:
+
+                                                                            System.out.print("Digite o Novo sexo: MASCULINO (1) OU FEMININO (2): ");
+                                                                            sexo = dados_cliente.nextInt();
+
+                                                                            switch (sexo) {
+
+                                                                                case 1:
+
+                                                                                    sexo_resultado = "MASCULINO";
+                                                                                    vetor_sexos[c_cliente] = sexo_resultado;
+
+                                                                                    break;
+
+                                                                                case 2:
+
+                                                                                    sexo_resultado = "FEMININO";
+                                                                                    vetor_sexos[c_cliente] = sexo_resultado;
+
+                                                                                    break;
+
+                                                                                default :
+
+                                                                                    System.out.println("\n=X=X=X= COMANDO INVALIDO =X=X=X=");
+                                                                                    break;
+                                                                            }
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 4:
+
+                                                                            System.out.print("Digite o Novo Tipo De Pessoa: Fisica (1) ou Juridica(2): ");
+                                                                            pessoa = dados_cliente.nextInt();
+
+                                                                            switch (pessoa){
+
+                                                                                case 1:
+
+                                                                                    pessoa_resultado = "Fisica";
+                                                                                    vetor_pessoas[c_cliente] = pessoa_resultado;
+
+                                                                                    break;
+
+                                                                                case 2:
+
+                                                                                    pessoa_resultado = "Juridica";
+                                                                                    vetor_pessoas[c_cliente] = pessoa_resultado;
+
+                                                                                    break;
+
+                                                                                default :
+
+                                                                                    System.out.println("\n=X=X=X= COMANDO INVALIDO =X=X=X=");
+                                                                                    break;
+                                                                            }
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 5:
+
+                                                                            System.out.print("Digite o Novo DD: ");
+                                                                            dd = dados_cliente.nextInt();
+                                                                            vetor_dds[c_cliente] = dd;
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 6:
+
+                                                                            System.out.print("Digite o Novo Telefone: ");
+                                                                            telefone = dados_cliente.nextInt();
+                                                                            vetor_telefones[c_cliente] = telefone;
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 7:
+
+                                                                            System.out.print("Digite o Novo Logradouro: ");
+                                                                            logradouro = dados_cliente_s.nextLine();
+                                                                            vetor_logradouros[c_cliente] = logradouro;
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 8:
+
+                                                                            System.out.print("Digite o Novo Complemento: ");
+                                                                            complemento = dados_cliente_s.nextLine();
+                                                                            vetor_complementos[c_cliente] = complemento;
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 9:
+
+                                                                            System.out.print("Digite a Nova Cidade: ");
+                                                                            cidade = dados_cliente_s.nextLine();
+                                                                            vetor_cidades[c_cliente] = cidade;
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 10:
+
+                                                                            System.out.print("Digite o Novo Estado: ");
+                                                                            estado = dados_cliente_s.nextLine();
+                                                                            vetor_estados[c_cliente] = estado;
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 11:
+
+                                                                            System.out.print("Digite o Novo Bairro: ");
+                                                                            bairro = dados_cliente_s.nextLine();
+                                                                            vetor_bairros[c_cliente] = bairro;
+
+                                                                            System.out.print("\n=X=X=X= INFORMACAO ALTERADA COM SUCESSO =X=X=X=");
+
+                                                                            break;
+
+                                                                        case 12:
+
+                                                                            System.out.println("\n=X=X=X= SAINDO DO MENU DE ALTERACAO DO CLIENTE =X=X=X=\n");
+
+                                                                            break;
+
+                                                                        default :
+
+                                                                            System.out.println("\n=X=X=X= COMANDO INVALIDO =X=X=X=");
+                                                                            break;
+
+                                                                    }
+
+
+                                                                }while (escolha_editar != 12);
+
+                                                                break;
+
+                                                        }
+
+                                                    } while (editar_dados != 2);
+
+                                                    break;
+
+                                                //SAIR DE DADOS CLIENTES
+                                                case 2:
+
+                                                    System.out.println("\n=X=X=X SAINDO DO MENU DE INFORMACOES DO CLIENTE =X=X=X");
+
+                                                    break;
+
+                                                default :
+
+                                                    System.out.println("\n=X=X=X= COMANDO INVALIDO =X=X=X=");
+                                                    break;
+
+
+                                            }
+
+                                        } while (lista_cliente != 2);
+
+                                        break;
+
+                                    //SAIR DO MENU DO FUNCIONARO
+                                    case 3:
+
+                                        System.out.println("\n=X=X=X= SAINDO DO MENU DE FUNCIONARIO =X=X=X=\n");
+
+                                        break;
+
+                                    default :
+
+                                        System.out.println("\n=X=X=X= COMANDO INVALIDO =X=X=X=");
+                                        break;
+
+
+                                }
+
+
+                                //BREAK PARA CASE 1 OPÇÕES DO FUNCIONARIO
+                                break;
+
+                            //GERENCIAR PRODUTOS
+                            case 2:
+
+                                do {
+
+                                    System.out.println("\n======GERENCIAR PRODUTOS======");
+
+                                    System.out.println("    CODIGO  |\tPRODUTO \t   |  VALOR");
+                                    for (int i = 0; i < vetor_produtos.length; i++) {
+
+                                        if (vetor_produtos[i] != null) {
+
+                                            System.out.print("\t   " + vetor_codigos_produtos[i]);
+                                            System.out.print("    \t" + vetor_produtos[i]);
+
+                                            if (vetor_produtos[i].length() <= 3) {
+
+                                                System.out.print("\t");
+                                            }
+                                            if (vetor_produtos[i].length() <= 7) {
+
+                                                System.out.print("\t");
+                                            }
+                                            System.out.print("\t      R$ " + vetor_valores[i] + "\n");
+
+                                        }
+
+                                    }
+
+                                    System.out.println("\n1  |  Adicionar Produtos");
+                                    System.out.println("2  |  Alterar Precos");
+                                    System.out.println("3  |  Excluir Produto ");
+                                    System.out.println("4  |  Sair \n");
+                                    System.out.print("Digite Um Numero Para PROSSEGUIR: ");
+                                    opcoes_produtos = opcoes.nextInt();
+
+                                    switch (opcoes_produtos) {
+
+                                        case 1:
+
+                                            System.out.print("\nDigite O Nome Do Novo Produto: ");
+                                            produto = nome_produtos.nextLine();
+
+                                            for (int i = 0; i < vetor_produtos.length; i++) {
+
+                                                if (vetor_produtos[i] == null) {
+
+                                                    vetor_produtos[i] = produto;
+                                                    System.out.print("Digite O Valor Do Novo Produto: ");
+                                                    precos = novos_valores.nextFloat();
+                                                    vetor_valores[i] = precos;
+
+                                                    break;
+
+                                                }
+
+                                            }
+
+
+                                            break;
+
+                                        case 2:
+
+                                            System.out.print("\nDigite o Codigo Do Produto Que Quer Alterar o Valor: ");
+                                            codigo_produtos = codigos_produtos.nextInt();
+
+                                            System.out.println("\nProduto: " + vetor_produtos[codigo_produtos]);
+                                            System.out.println("Valor Atual: " + vetor_valores[codigo_produtos]);
+                                            System.out.print("\nDigite o Novo Valor: ");
+                                            precos = novos_valores.nextFloat();
+                                            vetor_valores[codigo_produtos] = precos;
+
+                                            break;
+
+                                        case 3:
+
+                                            System.out.print("\nDigite o Codigo Do Produto Que Deseja Excluir: ");
+                                            codigo_produtos = codigos_produtos.nextInt();
+
+                                            if ( (vetor_produtos[codigo_produtos] == null) || (codigo_produtos < 0)) {
+
+                                                System.out.println("\n=X=X=X= Digite Um Codigo Valido =X=X=X=\n");
+                                            }
+                                            else {
+
+                                                for (int i = codigo_produtos; i < vetor_produtos.length;i++) {
+
+                                                    if (vetor_produtos[i+prox] == null) {
+
+                                                        vetor_produtos[i] = null;
+                                                        break;
+
+                                                    }
+                                                    else {
+
+                                                        vetor_produtos[i] = vetor_produtos[i+prox];
+                                                        vetor_valores[i] = vetor_valores[i+prox];
+
+
+                                                        if (vetor_produtos[i+prox] == null) {
+
+                                                            vetor_produtos[i] = null;
+                                                            break;
+
+                                                        }
+
+                                                    }
+
+
+                                                }
+
+                                            }
+
+                                            break;
+
+                                        case 4:
+
+                                            System.out.println("\n=X=X=X= SAINDO DO GERENCIADOR DE PRODUTOS =X=X=X=");
+
+                                            break;
+
+                                        default :
+
+                                            System.out.println("\n=X=X=X= COMANDO INVALIDO =X=X=X=");
+                                            break;
+                                    }
+
+
+                                } while (opcoes_produtos != 4);
+
+
+                                //BREAK PARA CASE 2 OPÇÕES DO FUNCIONARIO
+                                break;
+
+                            //GERENCIAR DESCONTO
+
+                            case 3:
+
+                                do {
+
+                                    System.out.println("=======GERENCIAR DESCONTOS======");
+                                    System.out.println("Desconto: " + desconto + "%");
+                                    System.out.println("\n1  |  Adicionar/Alterar Desconto");
+                                    System.out.println("2  |  Remover Desconto");
+                                    System.out.println("3  |  Sair");
+                                    System.out.print("\nDigite Um Numero Para Prosseguir: ");
+                                    opcao_desconto = opcoes.nextInt();
+
+                                    switch (opcao_desconto) {
+
+                                        //ADIONAR DESCONTO
+                                        case 1:
+
+                                            System.out.println("\nNosso Desconto Eh Utilizado No Valor Total Do Carrinho!\n");
+                                            System.out.print("Digite O Nome do Cupom de Desconto: ");
+                                            nome_cupom = nome_cupons.nextLine();
+                                            System.out.print("Digite O Valor Do Desconto: % ");
+                                            desconto = descontos.nextFloat();
+
+                                            desconto = (desconto / 100);
+
+                                            System.out.println("Desconto adicionado com sucesso");
+
+                                            break;
+
+                                        //REMOVER DESCONTO
+                                        case 2:
+
+                                            System.out.println("\nDeseja Remover O Desconto: ");
+                                            System.out.println("\n1  |  SIM");
+                                            System.out.println("2  |  NAO\n");
+                                            System.out.print("Digite Um Numero Para PROSSEGUIR: ");
+                                            remover_desconto = opcoes.nextInt();
+
+                                            switch (remover_desconto) {
+
+                                                case 1:
+
+                                                    desconto = 0;
+                                                    nome_cupom = null;
+                                                    System.out.println("\n=X=X=X= Desconto REMOVIDO Com Sucesso =X=X=X=\n");
+
+                                                    break;
+
+                                                case 2:
+
+                                                    System.out.println("\n=X=X=X= Saindo Do Menu Remover Desconto =X=X=X=\n");
+
+                                                    break;
+
+                                                default:
+
+                                                    System.out.println("\n=X=X=X= Comando invalido =X=X=X=\n");
+
+                                                    break;
+
+                                            }
+
+                                            break;
+
+                                        //SAIR DO GERENCIADOR DE DESCONTO
+                                        case 3:
+
+                                            System.out.println("\n=X=X=X= Saindo do Gerenciamento De Desconto...=X=X=X=");
+
+                                            break;
+
+                                        default :
+
+                                            System.out.println("\n=X=X=X= COMANDO INVALIDO =X=X=X=\n");
+                                            break;
+                                    }
+
+                                } while (opcao_desconto != 3);
+
+                                break;
+
+
+                            //CASE PARA SAIR DO MENU DO FUNCIONARIO
+                            case 4:
+
+                                System.out.println("\n=X=X=X=SAINDO DO MENU DE FUNCIONARIO =X=X=X=\n");
+
+                                break;
+
+
+
+                            default :
+
+                                System.out.println("\n=X=X=X= COMANDO INVALIDO =X=X=X=");
+
+                                break;
+
+
+
+
+                        }
+
+
+
+
+                    }while(opcao_menu_fun != 4);
+
+                    //BREAK SOU FUNCIONARIO
+                    break;
+
+
+                //CLIENTE
+                case 2:
+
+                    do {
+
+                        System.out.println("\n=====ESPACO CLIENTE======");
+                        System.out.println("1  |  Entrar");
+                        System.out.println("2  |  Sair");
+                        System.out.print("\nDigite Um Numero Para PROSSEGUIR: ");
+                        opcao_menu_cliente = opcoes.nextInt();
+
+                        switch (opcao_menu_cliente) {
+
+                            //ENTRAR
+                            case 1:
+
+
+                                System.out.print("\nDigite Seu Nome: ");
+                                name_cliente = dados_cliente_s.nextLine();
+
+                                for (int j = 0; j < t; j++) {
+
+                                    if (vetor_clientes[j].equals(name_cliente)) {
+
+                                        contador_itens = j;
+
+                                        verdadeiro = 1;
+
+                                        break;
+                                    } else {
+
+                                        if (vetor_clientes[j+prox] == null) {
+
+                                            System.out.println("\nNome incorreto ou cliente nao cadastrado. \n");
+
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                //CAPTCHA
+
+                                if (verdadeiro == 1) {
+
+                                    do {
+
+
+                                        Random gerador = new Random();
+                                        num1 = (gerador.nextInt(100));
+                                        num2 = (gerador.nextInt(10));
+                                        resultado_captcha = (num1 + num2);
+
+                                        System.out.println("\n*===PARA CONTINUAR RESOLVA O CAPTCHA===*\n");
+                                        System.out.print(num1 + " + " + num2 + " = ");
+                                        resposta_cliente = captcha.nextInt();
+                                        if (resposta_cliente == resultado_captcha) {
+
+                                            System.out.println("\n=*=*=*= CAPTCHA RESOLVIDO =*=*=*=\n");
+
+                                        } else {
+                                            System.out.println("\n=*=*=*= ERROU O CAPTCHA =*=*=*=\n=*=*=*= TENTE NOVAMENTE! =*=*=*=");
+                                        }
+                                    } while (resposta_cliente != resultado_captcha);
+
+                                    System.out.println("========== OLA, '" + name_cliente + "' SEJA BEM-VINDO ===========");
+
+                                    //LISTA PARA O CLIENTE
+
+
+                                    carrinho = 0;
+                                    contador = 0;
+                                    vetor_codigos_produtos_clientes[contador] = 0;
+                                    vetor_produtos_clientes[contador] = null;
+                                    vetor_quantidades[contador] = 0;
+                                    vetor_valores_cliente[contador] = 0;
+
+                                    do {
+
+
+                                        System.out.println("\nLISTA DE NOSSOS PRODUTOS \n");
+                                        System.out.println("    CODIGO  |\tPRODUTO \t   |  VALOR UN.");
+                                        for (int i = 0; i < vetor_produtos.length; i++) {
+
+                                            if (vetor_produtos[i] != null) {
+
+                                                System.out.print("\t   " + vetor_codigos_produtos[i]);
+                                                System.out.print("    \t" + vetor_produtos[i]);
+
+                                                if (vetor_produtos[i].length() <= 3) {
+
+                                                    System.out.print("\t");
+                                                }
+                                                if (vetor_produtos[i].length() <= 7) {
+
+                                                    System.out.print("\t");
+                                                }
+                                                System.out.print("\t      R$ " + vetor_valores[i] + "\n");
+
+                                            }
+
+                                        }
+
+                                        System.out.println("\nValor atual do carrinho: R$ " + carrinho);
+                                        System.out.println("\n 1  |  Adicionar Produtos No Carrinho");
+                                        System.out.println(" 2  |  Remover Produto Do Carrinho");
+                                        System.out.println(" 3  |  Fechar Compra");
+                                        System.out.println(" 4  |  Sair\n");
+                                        System.out.print("Digite Um Numero Para PROSSEGUIR: ");
+
+                                        escolha_cliente = opcoes.nextInt();
+
+                                        switch (escolha_cliente) {
+
+                                            //CASO ADICIONAR AO CARRINHO
+                                            case 1:
+
+
+                                                System.out.println("\n    CODIGO  |\tPRODUTO \t   |  VALOR");
+                                                for (int i = 0; i < vetor_produtos.length; i++) {
+
+                                                    if (vetor_produtos[i] != null) {
+
+                                                        System.out.print("\t   " + vetor_codigos_produtos[i]);
+                                                        System.out.print("    \t" + vetor_produtos[i]);
+
+                                                        if (vetor_produtos[i].length() <= 3) {
+
+                                                            System.out.print("\t");
+                                                        }
+                                                        if (vetor_produtos[i].length() <= 7) {
+
+                                                            System.out.print("\t");
+                                                        }
+                                                        System.out.print("\t      R$ " + vetor_valores[i] + "\n");
+
+                                                    }
+
+                                                }
+
+                                                System.out.print("\nDigite o codigo do produto que quer adicionar ao carrinho: ");
+                                                codigo_produtos_clientes = codigos_produtos.nextInt();
+
+                                                vetor_codigos_produtos_clientes[contador] = codigo_produtos_clientes;
+                                                vetor_produtos_clientes[contador] = vetor_produtos[codigo_produtos_clientes];
+                                                vetor_valores_cliente[contador] = vetor_valores[codigo_produtos_clientes];
+
+                                                System.out.print("Digite a quantidade: ");
+                                                quantidade = qtd.nextInt();
+                                                if (quantidade <= 0) {
+
+                                                    System.out.println("\nDigite um numero valido");
+
+                                                } else {
+
+                                                    vetor_quantidades[contador] = quantidade;
+                                                    carrinho += vetor_valores[codigo_produtos_clientes] * quantidade;
+
+                                                    System.out.println("\nItem adicionado ao carrinho! \n");
+
+                                                }
+
+
+                                                if (opcao_continuar_compras == 2) {
+
+                                                    System.out.println("\nCARRINHO: ");
+                                                    System.out.println("\n    CODIGO  |\tPRODUTO \t   |\tQUANTIDADE \t   |\tVALOR UN.");
+
+                                                    for (int i = 0; i < vetor_produtos_clientes.length; i++) {
+
+                                                        if (vetor_produtos_clientes[i] != null) {
+
+                                                            System.out.print("\t   " + vetor_codigos_produtos_clientes[i]);
+                                                            System.out.print("    \t" + vetor_produtos_clientes[i]);
+
+                                                            if (vetor_produtos_clientes[i].length() <= 3) {
+
+                                                                System.out.print("\t\t\t");
+                                                            }
+                                                            if (vetor_produtos_clientes[i].length() <= 7) {
+
+                                                                System.out.print("\t");
+                                                            }
+                                                            System.out.print("\t\t\t\t" + vetor_quantidades[i]);
+                                                            System.out.print("\t\t\t      R$ " + vetor_valores_cliente[i] + "\n");
+
+                                                        }
+
+                                                    }
+
+                                                }
+
+                                                contador++;
+
+                                                //BREAK ADICIONAR AO CARRINHO
+                                                break;
+
+                                            //CASO REMOVER DO CARRINHO
+                                            case 2:
+
+                                                System.out.println("\nCARRINHO: ");
+                                                System.out.println("\n    CODIGO  |\tPRODUTO \t   |\tQUANTIDADE \t   |\tVALOR UN.");
+
+                                                for (int i = 0; i < vetor_produtos_clientes.length; i++) {
+
+                                                    if (vetor_produtos_clientes[i] != null) {
+
+                                                        System.out.print("\t   " + vetor_codigos_produtos_clientes[i]);
+                                                        System.out.print("    \t" + vetor_produtos_clientes[i]);
+
+                                                        if (vetor_produtos_clientes[i].length() <= 3) {
+
+                                                            System.out.print("\t\t\t");
+                                                        }
+                                                        if (vetor_produtos_clientes[i].length() <= 7) {
+
+                                                            System.out.print("\t");
+                                                        }
+                                                        System.out.print("\t\t\t\t" + vetor_quantidades[i]);
+                                                        System.out.print("\t\t\t      R$ " + vetor_valores_cliente[i] + "\n");
+
+                                                    }
+
+                                                }
+
+                                                System.out.print("\nDigite o codigo do produto que quer remover do carrinho: ");
+                                                codigo_produtos_clientes = codigos_produtos.nextInt();
+
+                                                if (codigo_produtos_clientes < 0) {
+
+                                                    System.out.println("\nPor favor digite um codigo valido \n");
+
+                                                } else {
+
+                                                    for (int j = 0; j < t; j++) {
+
+                                                        if (codigo_produtos_clientes == vetor_codigos_produtos_clientes[j]) {
+
+                                                            System.out.print("Digite a quantidade que quer retirar: ");
+                                                            quantidade_retirar = qtd.nextInt();
+
+                                                            if ((quantidade_retirar < 0) || (quantidade_retirar > vetor_quantidades[j])) {
+
+
+                                                                System.out.println("\nPor favor digite uma quantidade valida ");
+
+
+                                                            } else {
+
+                                                                if (quantidade_retirar == vetor_quantidades[j]) {
+
+                                                                    carrinho = carrinho - (vetor_valores_cliente[j] * vetor_quantidades[j]);
+
+                                                                    for (int i = j; i < t; i++) {
+
+                                                                        vetor_quantidades[i] = vetor_quantidades[i + prox];
+                                                                        vetor_produtos_clientes[i] = vetor_produtos_clientes[i + prox];
+                                                                        vetor_codigos_produtos_clientes[i] = vetor_codigos_produtos_clientes[i + prox];
+                                                                        vetor_valores_cliente[i] = vetor_valores_cliente[i + prox];
+
+                                                                        if (vetor_produtos_clientes[i + prox] == null) {
+
+                                                                            vetor_quantidades[i] = 0;
+                                                                            vetor_produtos_clientes[i] = null;
+                                                                            vetor_codigos_produtos_clientes[i] = 0;
+                                                                            vetor_valores_cliente[i] = 0;
+
+                                                                            break;
+                                                                        }
+                                                                    }
+
+                                                                    break;
+
+                                                                } else {
+
+                                                                    vetor_quantidades[j] = vetor_quantidades[j] - quantidade_retirar;
+                                                                    carrinho = carrinho - (vetor_valores_cliente[j] * vetor_quantidades[j]);
+
+                                                                    break;
+
+                                                                }
+
+                                                            }
+
+                                                        }
+                                                    }
+
+
+                                                }
+
+                                                System.out.println("\nItem removido com sucesso");
+
+                                                //BREAK REMOVER DO CARRINHO
+                                                break;
+
+                                            //CASO FECHAR COMPRA
+                                            case 3:
+
+                                                System.out.println("\nCARRINHO: ");
+                                                System.out.println("\n    CODIGO  |\tPRODUTO \t   |\tQUANTIDADE \t   |\tVALOR UN.");
+
+                                                for (int i = 0; i < vetor_produtos_clientes.length; i++) {
+
+                                                    if (vetor_produtos_clientes[i] != null) {
+
+                                                        System.out.print("\t   " + vetor_codigos_produtos_clientes[i]);
+                                                        System.out.print("    \t" + vetor_produtos_clientes[i]);
+
+                                                        if (vetor_produtos_clientes[i].length() <= 3) {
+
+                                                            System.out.print("\t\t\t");
+                                                        }
+                                                        if (vetor_produtos_clientes[i].length() <= 7) {
+
+                                                            System.out.print("\t");
+                                                        }
+                                                        System.out.print("\t\t\t\t" + vetor_quantidades[i]);
+                                                        System.out.print("\t\t\t      R$ " + vetor_valores_cliente[i] + "\n");
+
+                                                    }
+
+                                                }
+
+                                                System.out.println("\nValor total do carrinho: R$ " + carrinho);
+
+                                                //SO VAI PERGUNTAR SOBRE O CUPOM SE JA HOUVER UM CUPOM CADASTRADO
+                                                if (nome_cupom != null) {
+
+                                                    do {
+
+                                                        System.out.println("\nDeseja adicionar um cupom de desconto? ");
+                                                        System.out.println("1. para SIM");
+                                                        System.out.println("2. para NAO");
+                                                        System.out.print("Digite um numero para prosseguir: ");
+                                                        opcao_cupom = opcoes.nextInt();
+
+                                                        switch (opcao_cupom) {
+
+                                                            //CASE ADICIONAR CUPOM
+                                                            case 1:
+
+                                                                System.out.print("\nDigite o nome do CUPOM de DESCONTO: ");
+                                                                nome_cupom_cliente = nome_cupons.nextLine();
+
+                                                                if (nome_cupom_cliente.equals(nome_cupom)) {
+
+                                                                    System.out.println("\nNossos cupons de desconto caem inteiramente no valor total do carrinho");
+                                                                    System.out.println("\nValor do Carrinho sem desconto: R$ " + carrinho);
+                                                                    carrinho = carrinho - (carrinho * desconto);
+
+                                                                    System.out.println("Valor do carrinho com desconto: R$ " + carrinho);
+                                                                    vetor_carrinho[contador] = carrinho;
+
+                                                                    opcao_cupom = 2;
+
+                                                                } else {
+
+                                                                    System.out.println("\nCupom nao encontrado");
+                                                                }
+
+                                                                //BREAK ADICIONAR CUPOM
+                                                                break;
+
+                                                            case 2:
+
+                                                                System.out.println("Por favor consulte novamente o nome do desconto com a fonte \n");
+
+                                                                break;
+
+                                                            default:
+
+                                                                System.out.println("\nPor favor digite uma opcao valida \n");
+
+                                                                break;
+                                                        }
+
+                                                    } while (opcao_cupom != 2);
+
+                                                }
+
+                                                do {
+
+                                                    System.out.println("\nEscolha uma opcao: ");
+                                                    System.out.println("1. pagar com CARTAO (CREDITO)");
+                                                    System.out.println("2. pagar com CARTAO (DEBITO)");
+                                                    System.out.println("3. pagar A VISTA");
+                                                    System.out.println("4. CANCELAR COMPRA");
+                                                    System.out.print("Digite um numero para prosseguir: ");
+                                                    forma_de_pagamento = opcoes.nextInt();
+
+                                                    switch (forma_de_pagamento) {
+
+                                                        //CARTAO CREDITO
+                                                        case 1, 2, 3:
+
+                                                            if (saldo >= carrinho) {
+
+                                                                System.out.println("\nPagamento aprovado!! \n");
+
+                                                                System.out.println("Voltando ao ESPACO CLIENTE...");
+
+                                                                forma_de_pagamento = 4;
+                                                                escolha_cliente = 4;
+
+                                                            } else {
+
+                                                                System.out.println("\nSaldo insuficiente \n");
+                                                            }
+
+                                                            //BREAK CARTAO CREDITO
+                                                            break;
+
+                                                        case 4:
+
+                                                            System.out.println("COMPRA CANCELADA ");
+                                                            System.out.println("Obrigado pela preferencia ");
+
+                                                            System.out.println("Voltando ao ESPACO CLIENTE... \n");
+                                                            escolha_cliente = 4;
+
+                                                            break;
+
+                                                        default:
+
+                                                            System.out.println("\nPor favor digite uma opcao valida \n");
+
+                                                            break;
+                                                    }
+
+                                                } while (forma_de_pagamento != 4);
+
+                                                vetor_carrinho[contador_itens] += carrinho;
+                                                contador_itens++;
+
+
+                                                //BREAK FECHAR COMPRA
+                                                break;
+                                        }
+
+
+                                    } while (escolha_cliente != 4);
+
+                                }
+
+                                //ENTRAR CLIENTE
+                                break;
+
+
+                            //SAIR DO ESPACO CLIENTE
+                            case 2:
+
+                                System.out.println("\n*SAINDO DO ESPACO CLIENTE* \n\n");
+
+                                //SAIR DO ESPAÇO CLIENTE
+                                break;
+
+                            default:
+
+                                System.out.println("\n*COMANDO INVALIDO*");
+                                break;
+                        }
+
+                    } while (opcao_menu_cliente != 2);
+
+                    //BREAK SOU CLIENTE
+                    break;
+
+                //DESLIGAR SISTEMA
+                case 3:
+
+                    System.out.println("\n=X=X=X= DESLIGANDO SISTEMA =X=X=X=\n\tOBRIGADO PELA PREFERENCIA!");
+                    break;
+
+                //OPÇÃO INICIAL
+                default :
+
+                    System.out.println("\n=X=X=X= COMANDO INVALIDO =X=X=X=\n");
+                    break;
+            }
+
+        } while (opcao_inicial != 3);
+
+
+
+    }
+
+
+}
